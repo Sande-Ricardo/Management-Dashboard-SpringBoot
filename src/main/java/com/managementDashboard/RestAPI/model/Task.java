@@ -17,7 +17,7 @@ public class Task {
     private String content;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_headline")
-    private Headline id_headline;
+//    @ManyToOne
+//    @JoinColumn(name = "id_headline")
+//    private Headline id_headline;
 }

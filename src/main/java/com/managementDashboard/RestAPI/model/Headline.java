@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -11,15 +12,15 @@ public class Headline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_headline")
-    private Integer id_headline;
+    private Long id;
 
     @Column(name="content")
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    private User id_user;
+    @JsonIgnore
+    private User user;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="id_user")

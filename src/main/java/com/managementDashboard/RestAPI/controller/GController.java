@@ -8,6 +8,7 @@ import com.managementDashboard.RestAPI.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,7 +37,7 @@ public class GController {
     @GetMapping("/get/{id}")
     public Optional<UserG> getData (@PathVariable("id") Long id){
 
-        User user = userService.getUserById(id);
+        ResponseEntity<User> user = userService.getUserById(id);
 //        List<Headline> headlines = headlineService.getAllHeadlinesById(id);
 
 //        UserG userg = new UserG(user, headlines);

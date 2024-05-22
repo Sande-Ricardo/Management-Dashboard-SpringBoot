@@ -22,9 +22,9 @@ public class Extension {
     private String content;
 
 
-    @OneToOne
-    @JoinColumn(name = "id_task")
-    private Task id_task;
+//    @OneToOne
+//    @JoinColumn(name = "id_task")
+//    private Task id_task;
 
 
 }
