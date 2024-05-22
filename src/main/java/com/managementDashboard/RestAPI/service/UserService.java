@@ -23,14 +23,8 @@ public class UserService {
     @Autowired
     UserRepositoryI userRepositoryI;
 
-    public ArrayList <User> getUser (){
-        //try {
-            return (ArrayList<User>) userRepositoryI.findAll();
-        //}catch (Exception Err) {
-        //    return null;
-        //}
-    }
 
+//          CREATE
 
     public boolean setUser(User data) {
         try {
@@ -41,14 +35,44 @@ public class UserService {
         }
     }
 
-//    public User getUserById(Long id ){
-//        return userRepositoryI.findById(id).orElse(null);
-//    }
+
+//          READ
+
+    public ArrayList <User> getUser (){
+        //try {
+            return (ArrayList<User>) userRepositoryI.findAll();
+        //}catch (Exception Err) {
+        //    return null;
+        //}
+    }
+
     public ResponseEntity<User>  getUserById(Long id ){
         User user = userRepositoryI.findById(id).orElse(null);
         return ResponseEntity.ok(user);
     }
 
+    public ArrayList<User> getUserByEmail(String email){
+       return userRepositoryI.findByEmail(email);
+    }
+
+
+//          UPDATE
+
+
+//          DELETE
+    public Boolean deleteUserById(Long id){
+        try {
+            userRepositoryI.deleteById(id);
+            return true;
+        } catch (Exception Err){
+            return false;
+        }
+    }
+
+
+//    public User getUserById(Long id ){
+//        return userRepositoryI.findById(id).orElse(null);
+//    }
 
 //public ResponseEntity<User> getUserById(Long id){
 //        try{

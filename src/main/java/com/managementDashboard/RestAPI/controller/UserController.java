@@ -22,20 +22,48 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/get")
-    public ArrayList<User> ex(){
-        return userService.getUser();
-    }
+
+//          CREATE
 
     @PostMapping("/set")
-    public boolean ex(@RequestBody User user){
+    public boolean setUserById(@RequestBody User user) {
         return userService.setUser(user);
     }
 
+
+//          READ
+
+    @GetMapping("/get")
+    public ArrayList<User> ex() {
+        return userService.getUser();
+    }
+
     @GetMapping("/get/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         ResponseEntity<User> user = userService.getUserById(id);
         return user;
     }
+
+    @GetMapping("/get/email/{email}")
+    public ArrayList<User> getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
+    }
+
+
+//          UPDATE
+
+
+//          DELETE
+
+    @DeleteMapping("/del/{id}")
+    public boolean deleteUserById(@PathVariable Long id){
+        try{
+            userService.deleteUserById(id);
+            return true;
+        } catch (Exception Err){
+            return false;
+        }
+    }
+
 
 }

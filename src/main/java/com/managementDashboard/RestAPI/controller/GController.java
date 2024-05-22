@@ -32,7 +32,6 @@ public class GController {
     ExtensionService extensionService;
 
 
-    public UserData user;
 
     @GetMapping("/get/{id}")
     public Optional<UserG> getData (@PathVariable("id") Long id){
@@ -45,9 +44,9 @@ public class GController {
         return null;
     }
 
-    @GetMapping("/users")
-    public UserData users(){
-        return user;
-    }
+//    @GetMapping("/users")
+//    public UserData users(){
+//        return user;
+//    }
 
 }

@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -13,7 +14,7 @@ public class Extension {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_extension")
-    private Integer id_extension;
+    private Long id;
 
     @Column(name="tittle")
     private String tittle;
@@ -21,10 +22,11 @@ public class Extension {
     @Column(name="content")
     private String content;
 
-
-//    @OneToOne
-//    @JoinColumn(name = "id_task")
-//    private Task id_task;
+// foreign key asociada a task en uno a uno
+    @OneToOne
+    @JoinColumn(name = "id_task")
+    @JsonIgnore
+    private Task task;
 
 
 }

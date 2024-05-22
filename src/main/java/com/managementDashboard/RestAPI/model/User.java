@@ -20,28 +20,25 @@ public class User {
     @Column(name="name")
     private String name;
 
-// Cuando funcione lo habilito
-//    @Column(name="last_name")
-//    private String last_name;
+    @Column(name="last_name")
+    private String last_name;
 
-//    @Column(name="username")
-//    private String username;
+    @Column(name="username")
+    private String username;
 
-//    @Column(name="email")
-//    private String email;
+    @Column(name="email")
+    private String email;
 
-//    @Column(name="password")
-//    private String password;
+    @Column(name="password")
+    private String password;
 
-
+//  columna no visible que asocia de uno a muchos cada usuario con sus respectivos registros de headline
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL
 //            , fetch = FetchType.LAZY
     )
-    private Set<Headline> headline;
+    @Column(name="headlines")
+    private Set<Headline> headlines;
 
-//    @OneToMany
-//    @JoinColumn(name = "headline")
-//    private ArrayList<Headline> headline;
 
 }
 
