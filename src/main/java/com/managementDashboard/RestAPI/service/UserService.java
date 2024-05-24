@@ -1,14 +1,10 @@
 package com.managementDashboard.RestAPI.service;
 
-import com.managementDashboard.RestAPI.controller.UserController;
 import com.managementDashboard.RestAPI.model.User;
 import com.managementDashboard.RestAPI.repository.UserRepositoryI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResource;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +18,7 @@ public class UserService {
 
     @Autowired
     UserRepositoryI userRepositoryI;
+
 
 
 //          CREATE
@@ -46,6 +43,20 @@ public class UserService {
         //}
     }
 
+    public boolean userExistById(Long id){
+//        return userRepositoryI.findById(id).isPresent();
+
+//        if(userRepositoryI.countById(id) == 1)
+//            return true;
+//        else return false;
+
+//        logger.debug("Cantidad de usuarios obtenidos: {}", userRepositoryI.countById(id));
+
+//        return userRepositoryI.countById(id) == 1;
+
+        return userRepositoryI.existsById(id);
+    }
+
     public ResponseEntity<User>  getUserById(Long id ){
         User user = userRepositoryI.findById(id).orElse(null);
         return ResponseEntity.ok(user);
@@ -57,6 +68,15 @@ public class UserService {
 
 
 //          UPDATE
+
+    public boolean userUpdate(User user){
+        try {
+            userRepositoryI.save(user);
+            return true;
+        } catch (Exception Err){
+            return false;
+        }
+    }
 
 
 //          DELETE

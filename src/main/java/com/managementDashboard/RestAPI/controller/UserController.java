@@ -44,6 +44,11 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/get/exist/{id}")
+    public boolean userExistById (@PathVariable Long id){
+        return userService.userExistById(id);
+    }
+
     @GetMapping("/get/email/{email}")
     public ArrayList<User> getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
@@ -51,6 +56,14 @@ public class UserController {
 
 
 //          UPDATE
+
+    @PostMapping("/update/{id}")
+    public boolean updateById(@PathVariable Long id, @RequestBody User user){
+        if(userService.userExistById(id) && user.getId().equals(id) ) {
+            userService.userUpdate(user);
+            return true;
+        } else return false;
+    }
 
 
 //          DELETE
