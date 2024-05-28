@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.controller;
 
+import com.managementDashboard.RestAPI.model.Headline;
 import com.managementDashboard.RestAPI.model.User;
 import com.managementDashboard.RestAPI.service.UserService;
 import org.slf4j.Logger;
@@ -26,24 +27,29 @@ public class UserController {
 //          CREATE
 
     @PostMapping("/set")
-    public boolean setUserById(@RequestBody User user) {
+    public User setUser(@RequestBody User user) {
         return userService.setUser(user);
     }
+
+//    @PostMapping("/set_headline")
+//    public User setHeadline(@RequestBody Headline headline) {
+//        return userService.setHeadline(headline);
+//    }
 
 
 //          READ
 
     @GetMapping("/get")
-    public ArrayList<User> ex() {
-        return userService.getUser();
+    public ArrayList<User> getUsers() {
+        return userService.getUsers();
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-        ResponseEntity<User> user = userService.getUserById(id);
-        return user;
+        return userService.getUserById(id);
     }
 
+//  Sirve??
     @GetMapping("/get/exist/{id}")
     public boolean userExistById (@PathVariable Long id){
         return userService.userExistById(id);
@@ -57,12 +63,10 @@ public class UserController {
 
 //          UPDATE
 
+//  Revisar si es necesario el if, en lugar de la implementación en solitario
     @PostMapping("/update/{id}")
-    public boolean updateById(@PathVariable Long id, @RequestBody User user){
-        if(userService.userExistById(id) && user.getId().equals(id) ) {
-            userService.userUpdate(user);
-            return true;
-        } else return false;
+    public ResponseEntity<User> updateById(@PathVariable Long id, @RequestBody User user){
+        return userService.updateUserById(id, user);
     }
 
 
@@ -70,12 +74,7 @@ public class UserController {
 
     @DeleteMapping("/del/{id}")
     public boolean deleteUserById(@PathVariable Long id){
-        try{
-            userService.deleteUserById(id);
-            return true;
-        } catch (Exception Err){
-            return false;
-        }
+        return userService.deleteUserById(id);
     }
 
 

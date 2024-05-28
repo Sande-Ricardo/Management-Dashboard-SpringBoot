@@ -5,9 +5,7 @@ import com.managementDashboard.RestAPI.service.HeadlineService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -20,9 +18,40 @@ public class HeadlineController {
     @Autowired
     HeadlineService headlineService;
 
+
+//          CREATE
+
+    @PostMapping("/set")
+    public Headline setHeadline (@RequestBody Headline headline){
+        return headlineService.setHeadline(headline);
+    }
+
+
+//          READ
+
     @GetMapping("/get")
     public ArrayList <Headline> getHeadline (){
         return headlineService.getHeadline();
     }
 
+    @GetMapping("/get/{id}")
+    public Headline getHeadlineById (@PathVariable Long id){
+        return headlineService.getHeadlineById(id);
+    }
+
+
+//          UPDATE
+
+    @PostMapping("/update/{id}")
+    public Headline updateHeadlineById(@RequestBody Headline headline, @PathVariable Long id){
+        return headlineService.updateHeadlineId(id, headline);
+    }
+
+
+//          DELETE
+
+    @DeleteMapping("/del/{id}")
+    public boolean deleteHeadlineById(@PathVariable Long id){
+        return headlineService.deleteHeadlineById(id);
+    }
 }

@@ -3,6 +3,7 @@ package com.managementDashboard.RestAPI.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -20,8 +21,9 @@ public class Task {
     private String content;
 
 //  foreign key asociada a headline en muchos a uno
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_headline")
+    @JoinColumn(name = "headline")
     @JsonIgnore
     private Headline headline;
 
@@ -29,6 +31,7 @@ public class Task {
     @OneToOne(mappedBy = "task")
     private Extension extension;
 
+    private Long id_headline;
 
 
 //    @ManyToOne

@@ -3,6 +3,7 @@ package com.managementDashboard.RestAPI.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.print.attribute.standard.Sides;
 
@@ -23,10 +24,13 @@ public class Extension {
     private String content;
 
 // foreign key asociada a task en uno a uno
+    @Setter
     @OneToOne
-    @JoinColumn(name = "id_task")
+    @JoinColumn(name = "task")
     @JsonIgnore
     private Task task;
+
+    private Long id_task;
 
 
 }

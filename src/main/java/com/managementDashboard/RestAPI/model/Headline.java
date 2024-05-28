@@ -3,6 +3,7 @@ package com.managementDashboard.RestAPI.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -20,8 +21,9 @@ public class Headline {
     private String content;
 
 //  foreign key asociada a user en muchos a uno (muchos registros para un user)
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user")
     @JsonIgnore
     private User user;
 
@@ -29,5 +31,8 @@ public class Headline {
     @OneToMany(mappedBy = "headline", cascade = CascadeType.ALL)
     @Column(name="tasks")
     private Set<Task> tasks;
+
+    private Long id_user;
+
 
 }

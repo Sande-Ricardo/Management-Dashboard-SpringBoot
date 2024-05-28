@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.service;
 
+import com.managementDashboard.RestAPI.model.Headline;
 import com.managementDashboard.RestAPI.model.User;
 import com.managementDashboard.RestAPI.repository.UserRepositoryI;
 import org.slf4j.Logger;
@@ -23,19 +24,21 @@ public class UserService {
 
 //          CREATE
 
-    public boolean setUser(User data) {
+    public User setUser(User user) {
         try {
-            userRepositoryI.save(data);
-            return true;
+            userRepositoryI.save(user);
+            return user;
         }catch (Exception Err){
-            return false;
+            return null;
         }
     }
+
+//    public User setHeadline(Headline headline){}
 
 
 //          READ
 
-    public ArrayList <User> getUser (){
+    public ArrayList <User> getUsers(){
         //try {
             return (ArrayList<User>) userRepositoryI.findAll();
         //}catch (Exception Err) {
@@ -69,13 +72,15 @@ public class UserService {
 
 //          UPDATE
 
-    public boolean userUpdate(User user){
-        try {
-            userRepositoryI.save(user);
-            return true;
-        } catch (Exception Err){
-            return false;
-        }
+    public ResponseEntity<User> updateUserById(Long id, User user){
+        if(this.userExistById(id)){
+            try {
+                userRepositoryI.save(user);
+                return ResponseEntity.ok(user);
+            } catch (Exception Err){
+                return null;
+            }
+        } else return null;
     }
 
 

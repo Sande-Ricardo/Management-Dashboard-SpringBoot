@@ -40,6 +40,5 @@ public class User {
     @Column(name="headlines")
     private Set<Headline> headlines;
 
-
 }
 
