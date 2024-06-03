@@ -37,4 +37,6 @@ public class Task {
 //    @ManyToOne
 //    @JoinColumn(name = "id_headline")
 //    private Headline id_headline;
+
+
 }

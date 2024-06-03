@@ -27,7 +27,7 @@ public class UserController {
 //          CREATE
 
     @PostMapping("/set")
-    public User setUser(@RequestBody User user) {
+    public ResponseEntity<User> setUser(@RequestBody User user) {
         return userService.setUser(user);
     }
 
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/get/email/{email}")
-    public ArrayList<User> getUserByEmail(@PathVariable String email) {
+    public User getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
 

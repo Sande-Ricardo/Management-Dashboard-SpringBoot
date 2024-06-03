@@ -24,12 +24,19 @@ public class UserService {
 
 //          CREATE
 
-    public User setUser(User user) {
-        try {
-            userRepositoryI.save(user);
-            return user;
-        }catch (Exception Err){
+//  Un registro por email
+    public ResponseEntity<User> setUser(User user) {
+        if (userRepositoryI.findByEmail(user.getEmail()) != null) {
+            logger.error("Email ingresado se encuentra registrado.");
+            System.out.println("Email ingresado se encuentra registrado");
             return null;
+        } else {
+            try {
+                userRepositoryI.save(user);
+                return ResponseEntity.ok(user);
+            }catch (Exception Err){
+                return null;
+            }
         }
     }
 
@@ -65,7 +72,7 @@ public class UserService {
         return ResponseEntity.ok(user);
     }
 
-    public ArrayList<User> getUserByEmail(String email){
+    public User getUserByEmail(String email){
        return userRepositoryI.findByEmail(email);
     }
 

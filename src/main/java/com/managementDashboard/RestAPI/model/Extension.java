@@ -17,9 +17,11 @@ public class Extension {
     @Column(name="id_extension")
     private Long id;
 
+    @Setter
     @Column(name="tittle")
     private String tittle;
 
+    @Setter
     @Column(name="content")
     private String content;
 
@@ -30,6 +32,7 @@ public class Extension {
     @JsonIgnore
     private Task task;
 
+    @Setter
     private Long id_task;
 
 

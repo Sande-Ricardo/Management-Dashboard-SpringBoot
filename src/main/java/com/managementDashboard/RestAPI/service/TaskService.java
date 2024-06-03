@@ -1,7 +1,9 @@
 package com.managementDashboard.RestAPI.service;
 
+import com.managementDashboard.RestAPI.model.Extension;
 import com.managementDashboard.RestAPI.model.Headline;
 import com.managementDashboard.RestAPI.model.Task;
+import com.managementDashboard.RestAPI.repository.ExtensionRepositoryI;
 import com.managementDashboard.RestAPI.repository.HeadlineRepositoryI;
 import com.managementDashboard.RestAPI.repository.TaskRepositoryI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,26 @@ public class TaskService {
     TaskRepositoryI taskRepositoryI;
     @Autowired
     HeadlineRepositoryI headlineRepositoryI;
+    @Autowired
+    ExtensionRepositoryI extensionRepositoryI;
 
 
 //          CREATE
 
+//  Crea una task y una extension a la vez
     public Task setTask (Task task){
         try {
             task.setHeadline(headlineRepositoryI.findById(task.getId_headline()).orElseThrow());
             taskRepositoryI.save(task);
+            Extension extension = new Extension();
+            extension.setTask(task);
+//            cambiar esto
+            extension.setId_task(2L);
+            extension.setContent("");
+            extension.setTittle(task.getContent());
+
+            extensionRepositoryI.save(extension);
+
             return task;
         } catch (Exception Err){
             return null;

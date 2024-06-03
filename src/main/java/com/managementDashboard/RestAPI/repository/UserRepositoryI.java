@@ -9,10 +9,9 @@ import java.util.ArrayList;
 @Repository
 public interface UserRepositoryI extends CrudRepository <User, Long>{
 
-    public abstract ArrayList<User> findByEmail(String email);
+    public abstract User findByEmail(String email);
 
     public abstract Integer countById(Long id);
-
 
 
 }
