@@ -6,6 +6,8 @@ import com.managementDashboard.RestAPI.model.Task;
 import com.managementDashboard.RestAPI.repository.ExtensionRepositoryI;
 import com.managementDashboard.RestAPI.repository.HeadlineRepositoryI;
 import com.managementDashboard.RestAPI.repository.TaskRepositoryI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Set;
 
 @Service
 public class TaskService {
+
+    private final Logger logger = LoggerFactory.getLogger(TaskService.class);
 
     @Autowired
     TaskRepositoryI taskRepositoryI;
@@ -30,20 +34,24 @@ public class TaskService {
         try {
             task.setHeadline(headlineRepositoryI.findById(task.getId_headline()).orElseThrow());
             taskRepositoryI.save(task);
-            Extension extension = new Extension();
-            extension.setTask(task);
-//            cambiar esto
-            extension.setId_task(2L);
-            extension.setContent("");
-            extension.setTittle(task.getContent());
-
-            extensionRepositoryI.save(extension);
-
+            this.setExtension(task.getId_headline(),task);
             return task;
         } catch (Exception Err){
+//            logger.debug("No anduvo. Error: {}",  headlineRepositoryI.findById(task.getId_headline())); el contenido no se puede expresar (error)
             return null;
         }
+    };
+
+    public void setExtension (Long id_Task, Task task){
+        Extension extension = new Extension();
+        extension.setTask(task);
+        extension.setId_task(id_Task);
+        extension.setContent("");
+        extension.setTittle(task.getContent());
+
+        extensionRepositoryI.save(extension);
     }
+
 
 
 //          READ
