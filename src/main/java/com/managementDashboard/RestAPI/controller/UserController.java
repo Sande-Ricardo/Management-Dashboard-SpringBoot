@@ -27,8 +27,11 @@ public class UserController {
 //          CREATE
 
     @PostMapping("/set")
-    public ResponseEntity<User> setUser(@RequestBody User user) {
+    public ResponseEntity<User> setUser(@RequestBody User user){
+
+        logger.debug("userController");
         return userService.setUser(user);
+
     }
 
 //    @PostMapping("/set_headline")
@@ -40,8 +43,7 @@ public class UserController {
 //          READ
 
     @GetMapping("/get")
-    public ArrayList<User> getUsers() {
-        return userService.getUsers();
+    public ArrayList<User> getUsers() {return userService.getUsers();
     }
 
     @GetMapping("/get/{id}")

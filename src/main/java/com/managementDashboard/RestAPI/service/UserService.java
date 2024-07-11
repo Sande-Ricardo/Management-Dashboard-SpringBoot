@@ -28,14 +28,16 @@ public class UserService {
     public ResponseEntity<User> setUser(User user) {
         if (userRepositoryI.findByEmail(user.getEmail()) != null) {
             logger.error("Email ingresado se encuentra registrado.");
-            System.out.println("Email ingresado se encuentra registrado");
+//            System.out.println("Email ingresado se encuentra registrado");
             return null;
         } else {
             try {
                 userRepositoryI.save(user);
                 return ResponseEntity.ok(user);
             }catch (Exception Err){
+                logger.error("Formato inválido");
                 return null;
+
             }
         }
     }
