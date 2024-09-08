@@ -62,11 +62,17 @@ public class UserController {
         return userService.getUserByEmail(email);
     }
 
+    @GetMapping("/login/{email}/{password}")
+    public ResponseEntity<User> loginUser(@PathVariable String email, @PathVariable String password){
+        logger.debug("loginUser");
+        return userService.loginUser(email, password);
+    }
+
 
 //          UPDATE
 
 //  Revisar si es necesario el if, en lugar de la implementación en solitario
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<User> updateById(@PathVariable Long id, @RequestBody User user){
         return userService.updateUserById(id, user);
     }

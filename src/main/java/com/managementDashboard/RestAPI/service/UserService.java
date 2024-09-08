@@ -78,6 +78,24 @@ public class UserService {
        return userRepositoryI.findByEmail(email);
     }
 
+    public ResponseEntity<User> loginUser (String email, String password){
+
+        try{
+            User user = userRepositoryI.findByEmail(email);
+            if(!user.getPassword().equals(password)){
+                logger.debug("Contraseña incorrecta: " + password);
+                return null;
+            } else {
+                logger.debug("Login existoso");
+                return ResponseEntity.ok(user);
+            }
+        }catch (Exception error){
+            logger.debug("Email o contraseña incorrecta: " + email + " " + password);
+            return null;
+        }
+
+
+    }
 
 //          UPDATE
 
