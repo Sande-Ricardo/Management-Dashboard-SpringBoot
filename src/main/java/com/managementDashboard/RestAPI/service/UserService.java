@@ -105,6 +105,9 @@ public class UserService {
                 userRepositoryI.save(user);
                 return ResponseEntity.ok(user);
             } catch (Exception Err){
+                System.out.println("Update error!!");
+                System.out.println(user);
+                System.out.println(id);
                 return null;
             }
         } else return null;

@@ -42,7 +42,7 @@ public class HeadlineController {
 
 //          UPDATE
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public Headline updateHeadlineById(@RequestBody Headline headline, @PathVariable Long id){
         return headlineService.updateHeadlineId(id, headline);
     }

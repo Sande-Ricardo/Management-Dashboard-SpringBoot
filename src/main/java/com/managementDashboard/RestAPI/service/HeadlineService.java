@@ -37,7 +37,8 @@ public class HeadlineService {
             headlineRepositoryI.save(headline);
             return headline;
         } catch (Exception Err){
-            return null;
+            System.out.println("No se pudo establecer headline");
+            return headline;
         }
     }
 
@@ -64,6 +65,7 @@ public class HeadlineService {
                 headlineRepositoryI.save(headline);
                 return headline;
             } catch (Exception Err){
+                System.out.println("Headline update error!");
                 return null;
             }
         } else return null;
