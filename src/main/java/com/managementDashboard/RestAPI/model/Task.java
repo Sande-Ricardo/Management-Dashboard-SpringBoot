@@ -2,36 +2,37 @@ package com.managementDashboard.RestAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
 
-@Getter
-@Table(name= "task")
+
 @Entity
+@Data
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_task")
-    private Long id;
+    private Long idTask;
 
-    @Column(name="content")
+    private String title;
     private String content;
 
-//  foreign key asociada a headline en muchos a uno
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "headline")
-    @JsonIgnore
-    private Headline headline;
 
-//  columna no visible que asocia de uno a uno cada task con un extension
-    @OneToOne(mappedBy = "task")
-    private Extension extension;
-
-    private Long id_headline;
+//    //  foreign key asociada a headline en muchos a uno
+//    @Setter
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "headline")
+//    @JsonIgnore
+//    private Headline headline;
+//
+////  columna no visible que asocia de uno a uno cada task con un extension
+//    @OneToOne(mappedBy = "task")
+//    private Extension extension;
+//
+//    private Long id_headline;
 
 
 //    @ManyToOne
