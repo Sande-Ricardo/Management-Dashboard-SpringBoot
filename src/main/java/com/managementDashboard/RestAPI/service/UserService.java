@@ -5,8 +5,10 @@ import com.managementDashboard.RestAPI.repository.UserRepositoryI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
 
@@ -60,8 +62,8 @@ public class UserService {
        return userRepositoryI.findByEmail(email);
     }
 
-    public ResponseEntity<User> loginUser (String email, String password){
-
+//    public ResponseEntity<User> loginUser (String email, String password){
+    public ResponseEntity<?> loginUser (String email, String password){
         try{
             User user = userRepositoryI.findByEmail(email);
             if(!user.getPassword().equals(password)){
@@ -72,8 +74,9 @@ public class UserService {
                 return ResponseEntity.ok(user);
             }
         }catch (Exception error){
-            logger.debug("Email o contraseña incorrecta: " + email + " " + password);
-            return null;
+            logger.debug("Email o contraseña incorrecta");
+//            return null;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password: ");
         }
     }
 
