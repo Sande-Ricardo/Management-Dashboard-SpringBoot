@@ -67,14 +67,14 @@ public class UserService {
         try{
             User user = userRepositoryI.findByEmail(email);
             if(!user.getPassword().equals(password)){
-                logger.debug("Contraseña '" + password + "' incorrecta!!");
-                return null;
+                logger.debug("Password '" + password + "' incorrect!!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password: ");
             } else {
-                logger.debug("Login existoso");
+                logger.debug("Succesful login");
                 return ResponseEntity.ok(user);
             }
         }catch (Exception error){
-            logger.debug("Email o contraseña incorrecta");
+            logger.debug("Incorrect email or password");
 //            return null;
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email or password: ");
         }
