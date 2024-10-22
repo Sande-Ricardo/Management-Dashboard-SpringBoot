@@ -24,6 +24,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Headline> headlines = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<FlashCard> flashCards = new ArrayList<>();
+
 
 
 

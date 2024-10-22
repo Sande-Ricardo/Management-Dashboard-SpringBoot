@@ -60,7 +60,7 @@ public class UserController {
     }
 
 
-//          UPDATE
+//          UPDATE .
 
 //  Revisar si es necesario el if, en lugar de la implementación en solitario
     @PostMapping("/update/{id}")
