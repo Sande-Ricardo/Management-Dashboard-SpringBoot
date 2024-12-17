@@ -2,7 +2,7 @@ package com.managementDashboard.RestAPI.config;
 
 
 import com.managementDashboard.RestAPI.service.UserDetailsServiceImpl;
-import io.jsonwebtoken.security.Password;
+//import io.jsonwebtoken.security.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
