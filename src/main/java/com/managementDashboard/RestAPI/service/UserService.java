@@ -42,7 +42,6 @@ public class UserService {
     }
 
 
-
 //          READ
 
     public List<User> getUsers(){

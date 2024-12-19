@@ -56,7 +56,7 @@ public class UserController {
     public User getUserByEmail(@PathVariable String email){
         return userService.getUserByEmail(email);
     }
-    @PreAuthorize("hasAuthority('READ')")
+//    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/login/{email}/{password}")
 //    public ResponseEntity<User> loginUser(@PathVariable String email, @PathVariable String password){
     public ResponseEntity<?> loginUser(@PathVariable String email, @PathVariable String password){

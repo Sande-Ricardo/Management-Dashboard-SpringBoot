@@ -1,8 +1,10 @@
 package com.managementDashboard.RestAPI.controller;
 
+import com.managementDashboard.RestAPI.controller.dto.AuthCreateUserRequest;
 import com.managementDashboard.RestAPI.controller.dto.AuthLoginRequest;
 import com.managementDashboard.RestAPI.controller.dto.AuthResponse;
 import com.managementDashboard.RestAPI.service.UserDetailsServiceImpl;
+import jakarta.validation.ReportAsSingleViolation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,13 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthLoginRequest userRequest){
+
         return new ResponseEntity<>(this.userDetailsService.loginUser(userRequest), HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid AuthCreateUserRequest authCreateUser){
+        return new ResponseEntity<>(this.userDetailsService.createUser(authCreateUser), HttpStatus.CREATED);
     }
 
 }
