@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.controller;
 
+import com.managementDashboard.RestAPI.controller.dto.UserUpdateRequest;
 import com.managementDashboard.RestAPI.model.User;
 import com.managementDashboard.RestAPI.service.UserService;
 import org.slf4j.Logger;
@@ -68,9 +69,10 @@ public class UserController {
 //          UPDATE .
 
 //  Revisar si es necesario el if, en lugar de la implementación en solitario
-    @PreAuthorize("hasAuthority('UPDATE')")
+    @PreAuthorize("permitAll")
+//    @PreAuthorize("hasAuthority('UPDATE')")
     @PostMapping("/update/{id}")
-    public ResponseEntity<User> updateById(@RequestBody User user, @PathVariable Long id){
+    public ResponseEntity<User> updateById(@RequestBody UserUpdateRequest user, @PathVariable Long id){
         return userService.updateUserById(id, user);
     }
 

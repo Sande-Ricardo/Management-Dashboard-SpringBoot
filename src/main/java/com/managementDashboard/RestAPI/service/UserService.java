@@ -1,5 +1,6 @@
 package com.managementDashboard.RestAPI.service;
 
+import com.managementDashboard.RestAPI.controller.dto.UserUpdateRequest;
 import com.managementDashboard.RestAPI.model.User;
 import com.managementDashboard.RestAPI.repository.UserRepositoryI;
 import org.slf4j.Logger;
@@ -81,15 +82,29 @@ public class UserService {
 
 //          UPDATE
 
-    public ResponseEntity<User> updateUserById(Long id, User user){
+    public ResponseEntity<User> updateUserById(Long id, UserUpdateRequest userUpdateRequest){
         if(this.userExistById(id)){
             try {
+
+                User user = userRepositoryI.findById(id).orElse(null);
+
+                if(user != null){
+                    user.setName(userUpdateRequest.name());
+                    user.setLast_name(userUpdateRequest.last_name());
+                    user.setUsername(userUpdateRequest.username());
+                    user.setEmail(userUpdateRequest.email());
+//                    user.setPassword(userUpdateRequest.password());
+                    user.setHeadlines(userUpdateRequest.headlines());
+                    user.setFlashCards(userUpdateRequest.flashCards());
+                }
+
                 userRepositoryI.save(user);
                 logger.debug("Update user");
                 return ResponseEntity.ok(user);
+
             } catch (Exception Err){
                 System.out.println("Update error!!");
-                System.out.println(user);
+                System.out.println(userUpdateRequest);
                 System.out.println(id);
                 return null;
             }
