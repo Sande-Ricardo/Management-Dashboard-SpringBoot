@@ -69,8 +69,8 @@ public class UserController {
 //          UPDATE .
 
 //  Revisar si es necesario el if, en lugar de la implementación en solitario
-    @PreAuthorize("permitAll")
-//    @PreAuthorize("hasAuthority('UPDATE')")
+//    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAuthority('UPDATE')")
     @PostMapping("/update/{id}")
     public ResponseEntity<User> updateById(@RequestBody UserUpdateRequest user, @PathVariable Long id){
         return userService.updateUserById(id, user);
