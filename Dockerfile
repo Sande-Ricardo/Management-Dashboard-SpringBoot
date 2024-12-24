@@ -1,5 +1,12 @@
+
+FROM gradle:7.6.0-jdk17 AS build
+WORKDIR /app
+COPY . .
+RUN gradle bootJar --no-daemon
+
+
 FROM openjdk:17-jdk-slim
-#ARG JAR_FILE=build/libs/RestAPI-0.0.1-SNAPSHOT.jar
-COPY build/libs/*.jar RestAPI.jar
+WORKDIR /md_restapi
+COPY --from=build /md_restapi/build/libs/*.jar RestAPI.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "RestAPI.jar"]
