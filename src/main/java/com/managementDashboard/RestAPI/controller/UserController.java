@@ -47,7 +47,8 @@ public class UserController {
     public List<User> getUsers() {return userService.getUsers();
     }
 
-    @PreAuthorize("hasAuthority('READ')")
+//    @PreAuthorize("hasAuthority('READ')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
@@ -73,6 +74,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('UPDATE')")
     @PostMapping("/update/{id}")
     public ResponseEntity<User> updateById(@RequestBody UserUpdateRequest user, @PathVariable Long id){
+        logger.debug("updateUser");
         return userService.updateUserById(id, user);
     }
 
