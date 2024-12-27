@@ -3,6 +3,7 @@ package com.managementDashboard.RestAPI;
 import com.managementDashboard.RestAPI.enums.RoleEnum;
 import com.managementDashboard.RestAPI.model.*;
 import com.managementDashboard.RestAPI.repository.UserRepositoryI;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,15 +22,19 @@ public class RestApiApplication {
 		SpringApplication.run(RestApiApplication.class, args);
 	}
 
+	@Value("${front.allowed.origins}")
+	private String allowedOrigin;
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
+
+
 				registry
 						.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")
+						.allowedOrigins(allowedOrigin)
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
