@@ -34,7 +34,8 @@ public class RestApiApplication {
 
 				registry
 						.addMapping("/**")
-						.allowedOrigins("https://mng-dashboard.netlify.app", "http://localhost:4200")
+						.allowedOrigins("https://dashboard.netlify.app", "http://localhost:4200")
+//						.allowedOrigins("https://mng-dashboard.netlify.app", "http://localhost:4200")
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
